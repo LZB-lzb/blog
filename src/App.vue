@@ -1,32 +1,49 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <Navbar v-if="token"></Navbar>
+    <div id="main" v-if="token">
+      <Aside></Aside>
+      <div>
+        <router-view></router-view>
+      </div>
     </div>
-    <router-view/>
+    <div v-if="!token">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
-<style lang="less">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+<script>
+  import { mapState } from "vuex";
+  import Navbar from './components/Navbar.vue'
+  import Aside from './components/Aside.vue'
+  export default {
+    computed: {
+      ...mapState({
+        token: (state) => state.login.token,
+      }),
+    },
+    components: {
+      Navbar,
+      Aside
+    },
+    mounted() {
+      this.$store.commit('gettoken')
+      if(!this.$store.state.login.token){
+       return this.$router.push('/login')
+      }
+    },
   }
-}
+</script>
+<style lang="less">
+  html,
+  body {
+    padding: 0;
+    margin: 0;
+  }
+
+  #main {
+    display: flex;
+    /* justify-content: space-between; */
+  }
 </style>
