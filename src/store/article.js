@@ -50,7 +50,7 @@ export default {
             axios.get('/api/addart').then(res => {
                 // console.log(res.data[0])
                 state.tableData = res.data
-                state.tableData.forEach(item=>item.date=item.date.substr(0,10))
+                state.tableData.forEach(item => item.date = item.date.substr(0, 10))
                 console.log(state.tableData)
             })
         },
@@ -71,17 +71,15 @@ export default {
                     //         return state.tableData.splice(index, 1)
                     //     }
                     // })
-                    let newtable = state.tableData.filter(item => item.title !== v.title)
-                    state.tableData = newtable
-                    return state.tableData.unshift(v)
+                    console.log(v)
+                    return axios.get(`/api/editartone?name=${v.name}&&title=${v.title}&&date=${v.date}&&message=${v.message}&&pub=${v.pub}`).then(res => { })
+                    // return state.tableData.unshift(v)
                 }
             }
             val.pub = true
             val.name = '王小虎'
             val.date = '2016-06-04'
-            return state.tableData.unshift(val)
-            // state.editdata = val
-            // console.log(state.editdata)
+            return axios.get(`/api/editarttwo?name=${val.name}&&title=${val.title}&&date=${val.date}&&message=${val.message}&&pub=${val.pub}`).then(res => { })
         },
         unpubedit(state, val) {
             if (val.name) {
@@ -89,15 +87,17 @@ export default {
                 if (v) {
                     v.pub = false
                     Object.assign(v, val)
-                    let newtable = state.tableData.filter(item => item.title !== v.title)
-                    state.tableData = newtable
-                    return state.tableData.unshift(v)
+                    return axios.get(`/api/editartone?name=${v.name}&&title=${v.title}&&date=${v.date}&&message=${v.message}&&pub=${v.pub}`).then(res => { })
+                    // let newtable = state.tableData.filter(item => item.title !== v.title)
+                    // state.tableData = newtable
+                    // return state.tableData.unshift(v)
                 }
             }
             val.pub = false
             val.name = '王小虎'
             val.date = '2016-06-04'
-            return state.tableData.unshift(val)
+            return axios.get(`/api/editarttwo?name=${val.name}&&title=${val.title}&&date=${val.date}&&message=${val.message}&&pub=${val.pub}`).then(res => { })
+            // return state.tableData.unshift(val)
         },
         torubbish(state, val) {
             let newtable = state.tableData.filter(item => item !== val)
