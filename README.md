@@ -4,8 +4,9 @@
 //该文件不包括express框架及mongoDb数据库，若未安装可跳过下面这一步，项目会展现假数据
 
 //在文件夹src/model下打开终端2执行 node app.js
-
+```
 //npm run serve
+```
 ## Project setup
 ```
 yarn install
