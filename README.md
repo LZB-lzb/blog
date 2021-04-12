@@ -1,6 +1,6 @@
 # blog
 ```
-1.在文件夹下打开终端1执行 npm i 或者cnpm i
+1.在文件夹下打开终端1执行cnpm i或者yarn install
 ```
 ```
 该文件不包括express框架及mongoDb数据库，若未安装可跳过第二步，项目会展现假数据
